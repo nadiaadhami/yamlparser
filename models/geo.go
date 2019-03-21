@@ -20,3 +20,9 @@ type Bounds struct {
 	Northeast LatLon `yaml:"northeast"`
 	Southwest LatLon `yaml:"southwest"`
 }
+type VatRates struct {
+	Standard     int   `yaml:"standard"`
+	Reduced      []int `yaml:"reduced"`
+	SuperReduced int   `yaml:"super_reduced"`
+	Parking      int   `yaml:"parking"`
+}

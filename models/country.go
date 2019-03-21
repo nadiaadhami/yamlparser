@@ -29,7 +29,7 @@ type Country struct {
 	DissolvedOn                    string   `yaml:"dissolved_on"`
 	EuMember                       string   `yaml:"eu_member"`
 	AltCurrency                    string   `yaml:"alt_currency"`
-	VatRates                       string   `yaml:"vat_rates"`
+	VatRates                       VatRates   `yaml:"vat_rates"`
 	PostalCode                     string   `yaml:"postal_code"`
 	CurrencyCode                   string   `yaml:"currency_code"`
 	StartOfWeek                    string   `yaml:"start_of_week"`
