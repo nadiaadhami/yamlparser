@@ -27,8 +27,7 @@ type CountryMock struct {
 }
 
 // reference : https://stackoverflow.com/questions/28682439/go-parse-yaml-file
-// todo - Country is not visible
-// todo - sort array of strings
+// todo parse Geo
 
 func main() {
 	parse1()
@@ -38,7 +37,7 @@ func main() {
 	parseCountry()
 }
 func parse1() {
-	filename, _ := filepath.Abs("./fruits1.yml")
+	filename, _ := filepath.Abs("./test1.yml")
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -51,7 +50,7 @@ func parse1() {
 	fmt.Printf("Value: %#v\n", config.Firewall_network_rules)
 }
 func parse2() {
-	filename, _ := filepath.Abs("./fruits2.yml")
+	filename, _ := filepath.Abs("./test2.yml")
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -64,7 +63,7 @@ func parse2() {
 	fmt.Printf("Value: %#v\n", config.Firewall_network_rules)
 }
 func parse3() {
-	filename, _ := filepath.Abs("./fruits3.yml")
+	filename, _ := filepath.Abs("./test3.yml")
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -101,6 +100,7 @@ func parseCountry() {
 		panic(err)
 	}
 	fmt.Printf("Value: %#v\n", config)
-	fmt.Println("LanguagesSpoken", config.LanguagesSpoken)
+	//fmt.Println("Geo", config.Geo)
+	fmt.Println("UnofficialNames", config.UnofficialNames)
 
 }
