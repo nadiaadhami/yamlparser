@@ -1,5 +1,7 @@
 package models
 
+type Countries []string
+
 type Country struct {
 	ID int64 `yaml:"column(id);pk;auto"`
 

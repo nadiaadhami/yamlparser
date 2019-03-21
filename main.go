@@ -127,7 +127,7 @@ func parseCountries(f string) [] string {
 }
 func loadCountries(arr []string) {
 	for i, v := range arr {
-		fmt.Println(i, v)
+		//fmt.Println(i, v)
 		pathToFile := "./data/countries/"+v+".yaml"
 		c := parseCountry(pathToFile)
 		fmt.Println("======", i, c.Name, c.Alpha2)
