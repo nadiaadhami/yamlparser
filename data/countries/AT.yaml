@@ -1,6 +1,10 @@
 ---
 continent: Europe
-
+address_format: |-
+  {{recipient}}
+  {{street}}
+  {{postalcode}} {{city}}
+  {{country}}
 alpha2: AT
 alpha3: AUT
 country_code: '43'
