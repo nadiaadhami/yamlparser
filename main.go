@@ -5,6 +5,7 @@ import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"path/filepath"
+	"yamlparser/models"
 )
 
 type Config struct {
@@ -30,14 +31,18 @@ type CountryMock struct {
 // todo parse Geo
 
 func main() {
+	countryFile := "./data/countries/AD.yaml"
+	countriesFile := "./data/countries.yaml"
 	parse1()
 	parse2()
 	parse3()
 	parseAD()
-	parseCountry()
+	parseCountry(countryFile)
+	cArray := parseCountries(countriesFile)
+	loadCountries(cArray)
 }
 func parse1() {
-	filename, _ := filepath.Abs("./test1.yml")
+	filename, _ := filepath.Abs("./data/test/test1.yml")
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -50,7 +55,7 @@ func parse1() {
 	fmt.Printf("Value: %#v\n", config.Firewall_network_rules)
 }
 func parse2() {
-	filename, _ := filepath.Abs("./test2.yml")
+	filename, _ := filepath.Abs("./data/test/test2.yml")
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -63,7 +68,7 @@ func parse2() {
 	fmt.Printf("Value: %#v\n", config.Firewall_network_rules)
 }
 func parse3() {
-	filename, _ := filepath.Abs("./test3.yml")
+	filename, _ := filepath.Abs("./data/test/test3.yml")
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -76,7 +81,7 @@ func parse3() {
 	fmt.Printf("Value: %#v\n", config)
 }
 func parseAD() {
-	filename, _ := filepath.Abs("./countries/AD.yaml")
+	filename, _ := filepath.Abs("./data/countries/AD.yaml")
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -88,19 +93,43 @@ func parseAD() {
 	}
 	fmt.Printf("Value: %#v\n", config)
 }
-func parseCountry() {
-	filename, _ := filepath.Abs("./countries/AD.yaml")
+func parseCountry(f string) models.Country {
+	filename, _ := filepath.Abs(f)
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
 	}
-	var config Country
+	var config models.Country
 	err = yaml.Unmarshal(yamlFile, &config)
 	if err != nil {
 		panic(err)
 	}
 	fmt.Printf("Value: %#v\n", config)
 	//fmt.Println("Geo", config.Geo)
-	fmt.Println("UnofficialNames", config.UnofficialNames)
-
+	//fmt.Println("UnofficialNames", config.UnofficialNames)
+	return config
+}
+func parseCountries(f string) [] string {
+	filename, _ := filepath.Abs(f)
+	yamlFile, err := ioutil.ReadFile(filename)
+	if err != nil {
+		panic(err)
+	}
+	var cArray models.Countries
+	//type StringArray []string
+	//var sa StringArray
+	err = yaml.Unmarshal(yamlFile, &cArray)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Value: %#v\n", cArray)
+	return cArray
+}
+func loadCountries(arr []string) {
+	for i, v := range arr {
+		fmt.Println(i, v)
+		pathToFile := "./data/countries/"+v+".yaml"
+		c := parseCountry(pathToFile)
+		fmt.Println("======", i, c.Name, c.Alpha2)
+	}
 }
