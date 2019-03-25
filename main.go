@@ -38,7 +38,9 @@ func main() {
 	parse3()
 	parseAD()
 	database.ParseCountry(f)
-	database.LoadCountries(d)
+	m := database.LoadCountries(d)
+	fmt.Println("Number of countries =", len(m))
+
 }
 
 func parse1() {

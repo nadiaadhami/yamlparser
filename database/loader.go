@@ -1,6 +1,7 @@
 package database
 
 import (
+	"client-integration-go/ecard-prototype-go/logger"
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -8,23 +9,25 @@ import (
 	"yamlparser/models"
 )
 
-func LoadCountries(dataDir string) {
+func LoadCountries(dataDir string) map[string]models.Country {
 	countriesFile := dataDir + "countries.yaml"
+	logger.LogInfo("LoadCountries", countriesFile)
 	cArray := ParseCountriesFile(countriesFile)
 	m:= LoadCountriesList(dataDir, cArray)
-	fmt.Println("Number of countries =", len(m))
+	return m
 }
 func LoadCountriesList(dataDir string, arr []string) map[string]models.Country {
 	var m map[string]models.Country
 	m = make(map[string]models.Country)
 
-	for i, v := range arr {
+	for _, v := range arr {
 		//fmt.Println(i, v)
 		pathToFile := dataDir+"countries/" + v + ".yaml"
 		c := ParseCountry(pathToFile)
-		fmt.Println("======", i, c.Name, c.Alpha2)
+		//fmt.Println( i, c.Name, c.Alpha2)
 		m[c.Alpha2] = c
 	}
+	fmt.Println("Number of countries loaded:", len(m))
 	return m
 }
 
@@ -39,9 +42,7 @@ func ParseCountry(f string) models.Country {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Value: %#v\n", config)
-	//fmt.Println("Geo", config.Geo)
-	//fmt.Println("UnofficialNames", config.UnofficialNames)
+	//fmt.Printf("Value: %#v\n", config)
 	return config
 }
 func ParseCountriesFile(f string) [] string {
@@ -50,13 +51,12 @@ func ParseCountriesFile(f string) [] string {
 	if err != nil {
 		panic(err)
 	}
-	var cArray models.Countries
+	var sa models.Countries
 	//type StringArray []string
-	//var sa StringArray
-	err = yaml.Unmarshal(yamlFile, &cArray)
+	err = yaml.Unmarshal(yamlFile, &sa)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Value: %#v\n", cArray)
-	return cArray
+	fmt.Printf("Value: %#v\n", sa)
+	return sa
 }
