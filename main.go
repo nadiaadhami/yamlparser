@@ -30,18 +30,17 @@ type CountryMock struct {
 // reference : https://stackoverflow.com/questions/28682439/go-parse-yaml-file
 
 func main() {
-	countryFile := "./database/data/countries/AD.yaml"
-	countriesFile := "./database/data/countries.yaml"
+	f := "./database/data/countries/AD.yaml"
+	d := "./database/data/"
+
 	parse1()
 	parse2()
 	parse3()
 	parseAD()
-	database.ParseCountry(countryFile)
-
-	cArray := database.ParseCountriesFile(countriesFile)
-	m:= database.LoadCountriesList(cArray)
-	fmt.Println("Number of countries =", len(m))
+	database.ParseCountry(f)
+	database.LoadCountries(d)
 }
+
 func parse1() {
 	filename, _ := filepath.Abs("./database/data/test/test1.yml")
 	yamlFile, err := ioutil.ReadFile(filename)

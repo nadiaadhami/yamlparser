@@ -8,13 +8,19 @@ import (
 	"yamlparser/models"
 )
 
-func LoadCountriesList(arr []string) map[string]models.Country {
+func LoadCountries(dataDir string) {
+	countriesFile := dataDir + "countries.yaml"
+	cArray := ParseCountriesFile(countriesFile)
+	m:= LoadCountriesList(dataDir, cArray)
+	fmt.Println("Number of countries =", len(m))
+}
+func LoadCountriesList(dataDir string, arr []string) map[string]models.Country {
 	var m map[string]models.Country
 	m = make(map[string]models.Country)
 
 	for i, v := range arr {
 		//fmt.Println(i, v)
-		pathToFile := "./database/data/countries/" + v + ".yaml"
+		pathToFile := dataDir+"countries/" + v + ".yaml"
 		c := ParseCountry(pathToFile)
 		fmt.Println("======", i, c.Name, c.Alpha2)
 		m[c.Alpha2] = c
