@@ -11,4 +11,5 @@ func TestLoader(t *testing.T) {
 	d := "../database/data/"
 	m := LoadCountries(d)
 	assert.Equal(t, len(m), 250)
+	assert.Equal(t, len(m["AD"].UnofficialNames), 3)
 }
