@@ -45,23 +45,39 @@ func main() {
 	fmt.Println("AD UnofficialNames =", m["AD"].UnofficialNames)
 
 	// parse subdivisions
-	sub := database.ParseSubdivision(us)
+	usSub := database.ParseSubdivision(us)
 	//fmt.Println("US subdivisions: ", sub)
-	fmt.Println("Number of US subdivisions: ", len(sub))
+	fmt.Println("Number of US subdivisions: ", len(usSub))
 	adSub := database.ParseSubdivision(ad)
-	fmt.Println("Number of AD subdivisions: ", len(adSub))
-	fmt.Println("++++++++++++++++++++++++++++++++++++++")
-	fmt.Println("US AA subdivision Name =", sub["AA"].Name)
-	fmt.Println("US AA subdivision Translations =", sub["AA"].Translations)
-	fmt.Println("US AA subdivision Translations size =", len(sub["AA"].Translations))
+	fmt.Println("\nNumber of AD subdivisions: ", len(adSub))
+	fmt.Println("\ncountry = US")
+	subdivisionName := "AA"
+	fmt.Println("subdivision:", subdivisionName)
+	fmt.Println(" subdivision Name =", usSub[subdivisionName].Name)
+	fmt.Println(" Translations =", usSub[subdivisionName].Translations)
+	fmt.Println(" Translations size =", len(usSub[subdivisionName].Translations))
+	fmt.Println(" UnofficialNames =", usSub[subdivisionName].UnofficialNames)
 
-	//fmt.Println("\nUS AK subdivision =", sub["AK"])
-	fmt.Println("US AK subdivision Name =", sub["AK"].Name)
-	fmt.Println("US AK subdivision Translations =", sub["AK"].Translations)
-	fmt.Println("US AK subdivision Translations size =", len(sub["AK"].Translations))
+	subdivisionName = "AK"
+	fmt.Println("subdivision:", subdivisionName)
+
+	fmt.Println(" subdivision Name =", usSub[subdivisionName].Name)
+	fmt.Println(" Translations =", usSub[subdivisionName].Translations)
+	fmt.Println(" Translations size =", len(usSub[subdivisionName].Translations))
+	fmt.Println(" UnofficialNames =", usSub[subdivisionName].UnofficialNames)
+
+	fmt.Println("country = BE")
+	be := "./database/data/subdivisions/BE.yaml"
+	beSubs := database.ParseSubdivision(be)
+	subdivisionName = "BRU"
+	fmt.Println("subdivision:", subdivisionName)
+	fmt.Println("subdivision Name =", beSubs[subdivisionName].Name)
+	fmt.Println("subdivision Translations =", beSubs[subdivisionName].Translations)
+	fmt.Println("subdivision Translations size =", len(beSubs[subdivisionName].Translations))
+	fmt.Println("subdivision UnofficialNames =", beSubs[subdivisionName].UnofficialNames)
 
 	subs := database.LoadSubdivisions(d)
-	fmt.Println("\nTotal subdivisions =", len(subs))
+	fmt.Println("\nTotal subdivision =", len(subs))
 
 }
 

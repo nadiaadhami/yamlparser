@@ -20,7 +20,7 @@ func LoadSubdivisions(dataDir string) map[string]models.Subdivisions {
 	countriesFile := dataDir + "countries.yaml"
 	fmt.Println("LoadSubdivisions countriesFile ", countriesFile)
 	cArray := ParseCountriesFile(countriesFile)
-	m := LoadSubdivisionsList(dataDir, cArray)
+	m := LoadSubdivisionsForCountries(dataDir, cArray)
 	return m
 }
 
@@ -38,10 +38,9 @@ func LoadCountriesList(dataDir string, arr []string) map[string]models.Country {
 	return m
 }
 
-func LoadSubdivisionsList(dataDir string, arr []string) map[string]models.Subdivisions {
+func LoadSubdivisionsForCountries(dataDir string, arr []string) map[string]models.Subdivisions {
 	var m map[string]models.Subdivisions
 	m = make(map[string]models.Subdivisions)
-	fmt.Println( "LoadSubdivisionsList")
 	count := 0
 
 	for _, v := range arr {
@@ -54,8 +53,8 @@ func LoadSubdivisionsList(dataDir string, arr []string) map[string]models.Subdiv
 		}
 	}
 	fmt.Println("Number of countries:", len(arr))
-	fmt.Println("Number of subdivisions loaded:", len(m) - count)
-	fmt.Println("Number of subdivisions not found:", count)
+	fmt.Println("Number of subdivision files loaded:", len(m) - count)
+	fmt.Println("Number of subdivision files not found:", count)
 
 	return m
 }
@@ -90,14 +89,12 @@ func ParseCountriesFile(f string) []string {
 	return sa
 }
 func ParseSubdivision(f string) models.Subdivisions {
-	fmt.Println("ParseSubdivision:", f)
 
 	filename, _ := filepath.Abs(f)
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
 		//panic(err)
 		// if subdivision file doesn't exist, continue
-		fmt.Println("Subdivision file does not exist for (", f, ") - will continue...")
 		return nil
 	}
 	var config models.Subdivisions
