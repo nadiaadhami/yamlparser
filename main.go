@@ -33,6 +33,7 @@ func main() {
 	f := "./database/data/countries/AD.yaml"
 	d := "./database/data/"
 	us := "./database/data/subdivisions/US.yaml"
+	ad := "./database/data/subdivisions/AD.yaml"
 
 	parse1()
 	parse2()
@@ -42,19 +43,25 @@ func main() {
 	m := database.LoadCountries(d)
 	fmt.Println("Number of countries =", len(m))
 	fmt.Println("AD UnofficialNames =", m["AD"].UnofficialNames)
+
+	// parse subdivisions
 	sub := database.ParseSubdivision(us)
 	//fmt.Println("US subdivisions: ", sub)
 	fmt.Println("Number of US subdivisions: ", len(sub))
-
-	fmt.Println("US AA subdivision =", sub["AA"])
+	adSub := database.ParseSubdivision(ad)
+	fmt.Println("Number of AD subdivisions: ", len(adSub))
+	fmt.Println("++++++++++++++++++++++++++++++++++++++")
 	fmt.Println("US AA subdivision Name =", sub["AA"].Name)
 	fmt.Println("US AA subdivision Translations =", sub["AA"].Translations)
 	fmt.Println("US AA subdivision Translations size =", len(sub["AA"].Translations))
 
-	fmt.Println("\nUS AK subdivision =", sub["AK"])
+	//fmt.Println("\nUS AK subdivision =", sub["AK"])
 	fmt.Println("US AK subdivision Name =", sub["AK"].Name)
 	fmt.Println("US AK subdivision Translations =", sub["AK"].Translations)
 	fmt.Println("US AK subdivision Translations size =", len(sub["AK"].Translations))
+
+	subs := database.LoadSubdivisions(d)
+	fmt.Println("\nTotal subdivisions =", len(subs))
 
 }
 

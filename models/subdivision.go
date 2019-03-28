@@ -2,7 +2,7 @@ package models
 
 type Subdivision struct {
 	Name            string         `yaml:"name"`
-	UnofficialNames string         `yaml:"unofficial_names"`
+	UnofficialNames interface{}         `yaml:"unofficial_names"`
 	Translations    TranslationMap `yaml:"translations"`
 	Geo             Geo            `yaml:"geo"`
 }
