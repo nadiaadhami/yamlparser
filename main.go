@@ -32,6 +32,7 @@ type CountryMock struct {
 func main() {
 	f := "./database/data/countries/AD.yaml"
 	d := "./database/data/"
+	us := "./database/data/subdivisions/US.yaml"
 
 	parse1()
 	parse2()
@@ -40,7 +41,18 @@ func main() {
 	database.ParseCountry(f)
 	m := database.LoadCountries(d)
 	fmt.Println("Number of countries =", len(m))
+	fmt.Println("AD UnofficialNames =", m["AD"].UnofficialNames)
+	sub := database.ParseSubdivision(us)
+	//fmt.Println("US subdivisions: ", sub)
+	fmt.Println("Number of US subdivisions: ", len(sub))
 
+	fmt.Println("US AA subdivision =", sub["AA"])
+	fmt.Println("US AA subdivision Name =", sub["AA"].Name)
+	fmt.Println("US AA subdivision Translations =", sub["AA"].Translations)
+
+	fmt.Println("\nUS AE subdivision =", sub["AE"])
+	fmt.Println("US AE subdivision Name =", sub["AE"].Name)
+	fmt.Println("US AE subdivision Translations =", sub["AE"].Translations)
 }
 
 func parse1() {
