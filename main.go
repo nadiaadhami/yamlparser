@@ -49,10 +49,13 @@ func main() {
 	fmt.Println("US AA subdivision =", sub["AA"])
 	fmt.Println("US AA subdivision Name =", sub["AA"].Name)
 	fmt.Println("US AA subdivision Translations =", sub["AA"].Translations)
+	fmt.Println("US AA subdivision Translations size =", len(sub["AA"].Translations))
 
-	fmt.Println("\nUS AE subdivision =", sub["AE"])
-	fmt.Println("US AE subdivision Name =", sub["AE"].Name)
-	fmt.Println("US AE subdivision Translations =", sub["AE"].Translations)
+	fmt.Println("\nUS AK subdivision =", sub["AK"])
+	fmt.Println("US AK subdivision Name =", sub["AK"].Name)
+	fmt.Println("US AK subdivision Translations =", sub["AK"].Translations)
+	fmt.Println("US AK subdivision Translations size =", len(sub["AK"].Translations))
+
 }
 
 func parse1() {
