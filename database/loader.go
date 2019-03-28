@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"github.com/spiritclips/ecard-prototype-go/logger"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"path/filepath"
@@ -18,7 +19,7 @@ func LoadCountries(dataDir string) map[string]models.Country {
 
 func LoadSubdivisions(dataDir string) map[string]models.Subdivisions {
 	countriesFile := dataDir + "countries.yaml"
-	fmt.Println("LoadSubdivisions countriesFile ", countriesFile)
+	logger.LogDebug("LoadSubdivisions countriesFile ", countriesFile)
 	cArray := ParseCountriesFile(countriesFile)
 	m := LoadSubdivisionsForCountries(dataDir, cArray)
 	return m
@@ -95,6 +96,7 @@ func ParseSubdivision(f string) models.Subdivisions {
 	if err != nil {
 		//panic(err)
 		// if subdivision file doesn't exist, continue
+		fmt.Println("file not found: ", f)
 		return nil
 	}
 	var config models.Subdivisions
