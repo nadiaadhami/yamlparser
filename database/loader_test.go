@@ -55,3 +55,15 @@ func TestParseSubdivisionsBE(t *testing.T) {
 
 }
 
+func TestSortedStates(t *testing.T) {
+	stateMap := GetStates("US", "./data/subdivisions/US.yaml")
+	assert.Equal(t,stateMap[1].ID, 1)
+	assert.Equal(t,stateMap[1].Name, "Armed Forces Americas")
+	assert.Equal(t,stateMap[1].Code, "AA")
+	assert.Equal(t,stateMap[1].CountryAlpha, "US")
+
+	assert.Equal(t,stateMap[60].ID, 60)
+	assert.Equal(t,stateMap[60].Name, "Wyoming")
+	assert.Equal(t,stateMap[60].Code, "WY")
+	assert.Equal(t,stateMap[60].CountryAlpha, "US")
+}

@@ -3,7 +3,7 @@ package models
 import "time"
 
 type States struct {
-	ID           int64  `orm:"column(id);pk;"`
+	ID           int  `orm:"column(id);pk;"`
 	Name         string `orm:"column(name);size(255)"`
 	Code         string `orm:"column(code);size(2)"`
 	CountryAlpha string `orm:"column(country_alpha);size(2)"`
@@ -15,3 +15,5 @@ type States struct {
 func (p *States) TableName() string {
 	return "states"
 }
+
+type StateMap map[int]States

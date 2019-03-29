@@ -2,10 +2,12 @@ package database
 
 import (
 	"fmt"
+	"github.com/spiritclips/address-book-service-go/database"
 	"github.com/spiritclips/ecard-prototype-go/logger"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"path/filepath"
+	"sort"
 	"yamlparser/models"
 )
 
@@ -54,7 +56,7 @@ func LoadSubdivisionsForCountries(dataDir string, arr []string) map[string]model
 		}
 	}
 	fmt.Println("Number of countries:", len(arr))
-	fmt.Println("Number of subdivision files loaded:", len(m) - count)
+	fmt.Println("Number of subdivision files loaded:", len(m)-count)
 	fmt.Println("Number of subdivision files not found:", count)
 
 	return m
@@ -109,4 +111,33 @@ func ParseSubdivision(f string) models.Subdivisions {
 	return config
 }
 
+func GetStates(countryAlpha string, p string) models.StateMap {
+	usSub := database.ParseSubdivision(p)
+	//sort
+	var keys []string
+	for k := range usSub {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	//assign id to each state in sorted order
+	i := 0
+	var stateMap models.StateMap
+	stateMap = make(models.StateMap)
+	for _, k := range keys {
+		i++
+		state := &models.States{
+			ID:           i,
+			Name:         usSub[k].Name,
+			Code:         k,
+			CountryAlpha: countryAlpha,
+		}
+		stateMap[i] = *state
+	}
+	return stateMap
+}
 
+func PrintStates(m models.StateMap) {
+	for k, v := range m {
+		fmt.Println(k,v)
+	}
+}

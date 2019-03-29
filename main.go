@@ -79,6 +79,8 @@ func main() {
 	subs := database.LoadSubdivisions(d)
 	fmt.Println("\nTotal subdivision =", len(subs))
 
+	stateMap := database.GetStates("US","./database/data/subdivisions/US.yaml")
+	database.PrintStates(stateMap)
 }
 
 func parse1() {
