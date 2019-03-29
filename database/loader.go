@@ -2,8 +2,6 @@ package database
 
 import (
 	"fmt"
-	"github.com/spiritclips/address-book-service-go/database"
-	"github.com/spiritclips/ecard-prototype-go/logger"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"path/filepath"
@@ -21,7 +19,7 @@ func LoadCountries(dataDir string) map[string]models.Country {
 
 func LoadSubdivisions(dataDir string) map[string]models.Subdivisions {
 	countriesFile := dataDir + "countries.yaml"
-	logger.LogDebug("LoadSubdivisions countriesFile ", countriesFile)
+	fmt.Println("LoadSubdivisions countriesFile ", countriesFile)
 	cArray := ParseCountriesFile(countriesFile)
 	m := LoadSubdivisionsForCountries(dataDir, cArray)
 	return m
@@ -112,7 +110,7 @@ func ParseSubdivision(f string) models.Subdivisions {
 }
 
 func GetStates(countryAlpha string, p string) models.StateMap {
-	usSub := database.ParseSubdivision(p)
+	usSub := ParseSubdivision(p)
 	//sort
 	var keys []string
 	for k := range usSub {
@@ -138,6 +136,6 @@ func GetStates(countryAlpha string, p string) models.StateMap {
 
 func PrintStates(m models.StateMap) {
 	for k, v := range m {
-		fmt.Println(k,v)
+		fmt.Println(k, v)
 	}
 }
